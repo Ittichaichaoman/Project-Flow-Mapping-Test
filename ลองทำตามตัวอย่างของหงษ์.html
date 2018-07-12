@@ -1,0 +1,2293 @@
+<html>
+
+<head>
+
+<title>Test</title>
+
+<link rel="stylesheet" href="libs/leaflet/leaflet.css">
+
+<script src="libs/leaflet/leaflet-src.js"></script>
+
+<script src="dist/L.LabelTextCollision.js"></script>
+
+<script src="Elec Super Right Information.js" charset="utf-8"></script>
+
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,300,600">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+<style type="text/css">.esri-truncated-attribution:hover {white-space: normal;}</style>
+<style type="text/css">.esri-truncated-attribution {vertical-align: -3px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: inline-block;transition: 0s white-space;transition-delay: 1s;max-width: 1865px;}</style>
+
+</head>
+
+<body class="">
+
+    <div id="map" style="width: 100.5%; height: 1070px; position: relative; outline: none;"></div>
+
+<select id="userInteractionSelect">
+    <option value="click"</option>          
+          </select>
+
+          <select id="pathSelectionTypeSelect">
+      <option value="SELECTION_NEW"</option>
+          </select>
+
+<!-- load Esri Leaflet because we want to use an Esri basemap -->
+  <script src="https://unpkg.com/esri-leaflet@2.1/dist/esri-leaflet.js"></script>
+
+   <!-- load animation tweening lib requirement for CanvasFlowMapLayer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+
+  <!-- then load CanvasFlowMapLayer -->
+  <script src="../../src/CanvasFlowmapLayer.js"></script>
+
+  <!-- also load 3rd-party CSV parsing libary just for this demo  -->
+  <script src="https://unpkg.com/papaparse@4.3/papaparse.min.js"></script>
+
+<script>
+
+                    var osmUrl = 'http://tile.openstreetmap.jp/{z}/{x}/{y}.png'
+
+                    var osmAttrib = 'Map data  <a href="http://openstreetmap.jp">OpenStreetMap</a> contributors';
+
+                    var osm = new L.TileLayer(
+                            osmUrl, {
+                                maxZoom : 18,
+                                attribution : osmAttrib
+                            });
+
+                    var labelTextCollision = new L.LabelTextCollision({
+                            collisionFlg : true
+                        });
+
+                    var map = new L.Map('map', {
+                        layers : [ osm ],
+                        center : new L.LatLng(13.746000, 100.500000),
+                        zoom : 6,
+                        renderer : labelTextCollision
+                    });
+
+                    var p = L.polyline(
+                            [ [ 14.578889, 100.469722 ],
+                                    [ 14.578889, 100.469722 ],
+                                    [ 14.578889, 100.469722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  ANG THONG1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.609722, 100.348333 ],
+                                    [ 14.609722, 100.348333 ],
+                                    [ 14.609722, 100.348333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  ANG THONG 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.125556, 100.929722 ],
+                                    [ 13.125556, 100.929722 ],
+                                    [ 13.125556, 100.929722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  AO PHAI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.113611, 100.914167 ],
+                                    [ 13.113611, 100.914167 ],
+                                    [ 13.113611, 100.914167 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  AO UDOM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.362778, 100.556111 ],
+                                    [ 14.362778, 100.556111 ],
+                                    [ 14.362778, 100.556111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  AYUTTHAYA 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.380556, 100.606944 ],
+                                    [ 14.380556, 100.606944 ],
+                                    [ 14.380556, 100.606944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  AYUTTHAYA 2'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 13.216667, 101.226111 ],
+                                    [ 13.216667, 101.226111 ],
+                                    [ 13.216667, 101.226111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN BUNG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.789167, 99.962222 ],
+                                    [ 13.789167, 99.962222 ],
+                                    [ 13.789167, 99.962222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN PONG 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.850556, 99.873056 ],
+                                    [ 13.850556, 99.873056 ],
+                                    [ 13.850556, 99.873056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN PONG 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.740556, 100.604722 ],
+                                    [ 13.740556, 100.604722 ],
+                                    [ 13.740556, 100.604722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG KAPI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.9375, 100.928056 ],
+                                    [ 12.9375, 100.928056 ],
+                                    [ 12.9375, 100.928056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG LAMUNG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.210833, 100.59 ],
+                                    [ 14.210833, 100.59 ],
+                                    [ 14.210833, 100.59 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG PA-IN 1'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 14.196111, 100.613611 ],
+                                    [ 14.196111, 100.613611 ],
+                                    [ 14.196111, 100.613611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG PA-IN 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.501111, 101.028611 ],
+                                    [ 13.501111, 101.028611 ],
+                                    [ 13.501111, 101.028611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG PAKONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.638889, 100.693056 ],
+                                    [ 13.638889, 100.693056 ],
+                                    [ 13.638889, 100.693056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG PHLI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 11.403333, 99.510556 ],
+                                    [ 11.403333, 99.510556 ],
+                                    [ 11.403333, 99.510556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG SAPHAN1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 11.42, 99.518333 ],
+                                    [ 11.42, 99.518333 ],
+                                    [ 11.42, 99.518333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG SAPHAN2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.708056, 100.394167 ],
+                                    [ 13.708056, 100.394167 ],
+                                    [ 13.708056, 100.394167 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANGKOK NOI'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 13.074167, 101.076111 ],
+                                    [ 13.074167, 101.076111 ],
+                                    [ 13.074167, 101.076111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BO WIN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.813889, 99.960556 ],
+                                    [ 12.813889, 99.960556 ],
+                                    [ 12.813889, 99.960556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHA-AM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.623889, 101.036667 ],
+                                    [ 13.623889, 101.036667 ],
+                                    [ 13.623889, 101.036667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHACHOENGSAO'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.907222, 100.558611 ],
+                                    [ 13.907222, 100.558611 ],
+                                    [ 13.907222, 100.558611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHAENG WATTHANA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.204444, 101.107222 ],
+                                    [ 15.204444, 101.107222 ],
+                                    [ 15.204444, 101.107222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHAI BADAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.636944, 99.6725 ],
+                                    [ 13.636944, 99.6725 ],
+                                    [ 13.636944, 99.6725 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHOM BUNG'
+                            }).addTo(map);
+                            
+                    var p = L.polyline(
+                            [ [ 12.857222, 100.925 ],
+                                    [ 12.857222, 100.925 ],
+                                    [ 12.857222, 100.925 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHOM THIEN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.337778, 100.994722 ],
+                                    [ 13.337778, 100.994722 ],
+                                    [ 13.337778, 100.994722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHON BURI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.568611, 99.921944 ],
+                                    [ 12.568611, 99.921944 ],
+                                    [ 12.568611, 99.921944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  HUA HIN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.914167, 99.633889 ],
+                                    [ 12.914167, 99.633889 ],
+                                    [ 12.914167, 99.633889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KAENG KRACHAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.986667, 99.998055 ],
+                                    [ 13.986667, 99.998055 ],
+                                    [ 13.986667, 99.998055 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KAMPHAENG SAEN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.023333, 99.544722 ],
+                                    [ 14.023333, 99.544722 ],
+                                    [ 14.023333, 99.544722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KANCHANABURI'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 14.794167, 98.600833 ],
+                                    [ 14.794167, 98.600833 ],
+                                    [ 14.794167, 98.600833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHAO LAEM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.571944, 101 ],
+                                    [ 13.571944, 101 ],
+                                    [ 13.571944, 101 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHLONG MAI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.805833, 101.670556 ],
+                                    [ 12.805833, 101.670556 ],
+                                    [ 12.805833, 101.670556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KLAENG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.826111, 100.556389 ],
+                                    [ 13.826111, 100.556389 ],
+                                    [ 13.826111, 100.556389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAT PHRAO'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.79, 100.655 ],
+                                    [ 14.79, 100.655 ],
+                                    [ 14.79, 100.655 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LOP BURI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.8475, 100.627222 ],
+                                    [ 14.8475, 100.627222 ],
+                                    [ 14.8475, 100.627222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LOP BURI 2'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 13.748611, 100.191944 ],
+                                    [ 13.748611, 100.191944 ],
+                                    [ 13.748611, 100.191944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAKHON CHAISI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.265, 101.699444 ],
+                                    [ 14.265, 101.699444 ],
+                                    [ 14.265, 101.699444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAKHON NAYOK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.808889, 100.811111 ],
+                                    [ 13.808889, 100.811111 ],
+                                    [ 13.808889, 100.811111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NONG CHOK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.809722, 100.515 ],
+                                    [ 13.809722, 100.515 ],
+                                    [ 13.809722, 100.515 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NORTH BANGKOK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.723889, 100.688056 ],
+                                    [ 13.723889, 100.688056 ],
+                                    [ 13.723889, 100.688056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  ON NUCH'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.403056, 100.782222 ],
+                                    [ 14.403056, 100.782222 ],
+                                    [ 14.403056, 100.782222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHACHI'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 13.088889, 99.945 ],
+                                    [ 13.088889, 99.945 ],
+                                    [ 13.088889, 99.945 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHETCHABURI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.75, 100.788611 ],
+                                    [ 14.75, 100.788611 ],
+                                    [ 14.75, 100.788611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHRA PHUTTHABAT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.143611, 101.321667 ],
+                                    [ 14.143611, 101.321667 ],
+                                    [ 14.143611, 101.321667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PRACHIN BURI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.838611, 101.548889 ],
+                                    [ 13.838611, 101.548889 ],
+                                    [ 13.838611, 101.548889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PRACHIN BURI 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 11.830833, 99.740556 ],
+                                    [ 11.830833, 99.740556 ],
+                                    [ 11.830833, 99.740556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PRACHUAP KHIRI KHAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.356944, 99.887777 ],
+                                    [ 12.356944, 99.887777 ],
+                                    [ 12.356944, 99.887777 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PRAN BURI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.973611, 100.571667 ],
+                                    [ 13.973611, 100.571667 ],
+                                    [ 13.973611, 100.571667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RANGSIT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.527778, 99.803056 ],
+                                    [ 13.527778, 99.803056 ],
+                                    [ 13.527778, 99.803056 ] ], {
+                                weight : 12,
+                                color : '#fec355',
+                                text : '  RATCHABURI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.502778, 99.796389 ],
+                                    [ 13.502778, 99.796389 ],
+                                    [ 13.502778, 99.796389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RATCHABURI 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.598333, 99.887222 ],
+                                    [ 13.598333, 99.887222 ],
+                                    [ 13.598333, 99.887222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RATCHABURI PP.'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.775833, 100.586944 ],
+                                    [ 13.775833, 100.586944 ],
+                                    [ 13.775833, 100.586944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RATCHADAPHISEK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.688056, 101.276111 ],
+                                    [ 12.688056, 101.276111 ],
+                                    [ 12.688056, 101.276111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RAYONG 1'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 12.754444, 101.164722 ],
+                                    [ 12.754444, 101.164722 ],
+                                    [ 12.754444, 101.164722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RAYONG 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.718889, 101.141944 ],
+                                    [ 12.718889, 101.141944 ],
+                                    [ 12.718889, 101.141944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RAYONG 3'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.97, 100.343056 ],
+                                    [ 13.97, 100.343056 ],
+                                    [ 13.97, 100.343056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAI NOI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.688333, 100.295556 ],
+                                    [ 13.688333, 100.295556 ],
+                                    [ 13.688333, 100.295556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAMPHRAN 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.730556, 100.231667 ],
+                                    [ 13.730556, 100.231667 ],
+                                    [ 13.730556, 100.231667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAMPHRAN 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.592222, 100.285278 ],
+                                    [ 13.592222, 100.285278 ],
+                                    [ 13.592222, 100.285278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAMUT SAKHON 1'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 13.538611, 100.233611 ],
+                                    [ 13.538611, 100.233611 ],
+                                    [ 13.538611, 100.233611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAMUT SAKHON 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.594722, 100.336111 ],
+                                    [ 13.594722, 100.336111 ],
+                                    [ 13.594722, 100.336111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAMUT SAKHON 3'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.509722, 100.134722 ],
+                                    [ 13.509722, 100.134722 ],
+                                    [ 13.509722, 100.134722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAMUT SAKHON 4'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.442222, 100.065278 ],
+                                    [ 13.442222, 100.065278 ],
+                                    [ 13.442222, 100.065278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAMUT SONGKHRAM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.511667, 100.918056 ],
+                                    [ 14.511667, 100.918056 ],
+                                    [ 14.511667, 100.918056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SARABURI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.6125, 101.086111 ],
+                                    [ 14.6125, 101.086111 ],
+                                    [ 14.6125, 101.086111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SARABURI 2'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 14.637222, 101.044167 ],
+                                    [ 14.637222, 101.044167 ],
+                                    [ 14.637222, 101.044167 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SARABURI 3'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.406944, 100.868611 ],
+                                    [ 14.406944, 100.868611 ],
+                                    [ 14.406944, 100.868611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SARABURI 4'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.75, 100.910833 ],
+                                    [ 12.75, 100.910833 ],
+                                    [ 12.75, 100.910833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SATTAHIP 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.666111, 100.955556 ],
+                                    [ 12.666111, 100.955556 ],
+                                    [ 12.666111, 100.955556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SATTAHIP 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.159444, 100.945556 ],
+                                    [ 13.159444, 100.945556 ],
+                                    [ 13.159444, 100.945556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SI RACHA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.874167, 100.440556 ],
+                                    [ 14.874167, 100.440556 ],
+                                    [ 14.874167, 100.440556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SING BURI'
+                            }).addTo(map);
+                            
+                    var p = L.polyline(
+                            [ [ 13.618056, 100.561111 ],
+                                    [ 13.618056, 100.561111 ],
+                                    [ 13.618056, 100.561111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SOUTH BANGKOK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.651111, 100.427222 ],
+                                    [ 13.651111, 100.427222 ],
+                                    [ 13.651111, 100.427222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SOUTH THON BURI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.405833, 99.136944 ],
+                                    [ 14.405833, 99.136944 ],
+                                    [ 14.405833, 99.136944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SRINAGARIND'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.489167, 100.133611 ],
+                                    [ 14.489167, 100.133611 ],
+                                    [ 14.489167, 100.133611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SUPHAN BURI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.247222, 100.289444 ],
+                                    [ 15.247222, 100.289444 ],
+                                    [ 15.247222, 100.289444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  TAKHLI 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.232778, 99.24 ],
+                                    [ 14.232778, 99.24 ],
+                                    [ 14.232778, 99.24 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THA THUNG NA'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 14.576944, 100.771944 ],
+                                    [ 14.576944, 100.771944 ],
+                                    [ 14.576944, 100.771944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  TAHLAN 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.568611, 100.761389 ],
+                                    [ 14.568611, 100.761389 ],
+                                    [ 14.568611, 100.761389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THALAN 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.578889, 100.805278 ],
+                                    [ 14.578889, 100.805278 ],
+                                    [ 14.578889, 100.805278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THALAN 3'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.626389, 100.665833 ],
+                                    [ 13.626389, 100.665833 ],
+                                    [ 13.626389, 100.665833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THEPHARAK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.228056, 100.781944 ],
+                                    [ 14.228056, 100.781944 ],
+                                    [ 14.228056, 100.781944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  WANG NOI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.4625, 101.731111 ],
+                                    [ 15.4625, 101.731111 ],
+                                    [ 15.4625, 101.731111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAMNET NARONG'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 16.535278, 101.688889 ],
+                                    [ 16.535278, 101.688889 ],
+                                    [ 16.535278, 101.688889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHULABHORN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.407778, 101.796667 ],
+                                    [ 16.407778, 101.796667 ],
+                                    [ 16.407778, 101.796667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  HUAI KUM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.831111, 101.569444 ],
+                                    [ 14.831111, 101.569444 ],
+                                    [ 14.831111, 101.569444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAM TAKHONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.402222, 101.738889 ],
+                                    [ 17.402222, 101.738889 ],
+                                    [ 17.402222, 101.738889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LOEI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.6975, 101.450278 ],
+                                    [ 14.6975, 101.450278 ],
+                                    [ 14.6975, 101.450278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PAK CHONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.868333, 101.775278 ],
+                                    [ 14.868333, 101.775278 ],
+                                    [ 14.868333, 101.775278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SIKHIU'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 18.527222, 98.533889 ],
+                                    [ 18.527222, 98.533889 ],
+                                    [ 18.527222, 98.533889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN KHUN KLANG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 19.800556, 99.095556 ],
+                                    [ 19.800556, 99.095556 ],
+                                    [ 19.800556, 99.095556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN YANG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.023889, 100.395278 ],
+                                    [ 16.023889, 100.395278 ],
+                                    [ 16.023889, 100.395278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANG MUN NAK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.829722, 100.996111 ],
+                                    [ 15.829722, 100.996111 ],
+                                    [ 15.829722, 100.996111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BUNG SAM PHAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.766944, 99.011111 ],
+                                    [ 18.766944, 99.011111 ],
+                                    [ 18.766944, 99.011111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHIANG MAI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.716111, 98.945556 ],
+                                    [ 18.716111, 98.945556 ],
+                                    [ 18.716111, 98.945556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHIANG MAI 3'
+                            }).addTo(map);
+                            
+                    var p = L.polyline(
+                            [ [ 19.850556, 99.857778 ],
+                                    [ 19.850556, 99.857778 ],
+                                    [ 19.850556, 99.857778 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHIANG RAI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.4375, 98.6925 ],
+                                    [ 18.4375, 98.6925 ],
+                                    [ 18.4375, 98.6925 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHOM THONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.801944, 100.129167 ],
+                                    [ 14.801944, 100.129167 ],
+                                    [ 14.801944, 100.129167 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  DOEBANG NANGBUAT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 19.963611, 99.158611 ],
+                                    [ 19.963611, 99.158611 ],
+                                    [ 19.963611, 99.158611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  FANG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.504167, 99.4875 ],
+                                    [ 16.504167, 99.4875 ],
+                                    [ 16.504167, 99.4875 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KAMPHAENGPHET'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.2475, 99.455 ],
+                                    [ 18.2475, 99.455 ],
+                                    [ 18.2475, 99.455 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAMPANG 1'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 18.357222, 99.572222 ],
+                                    [ 18.357222, 99.572222 ],
+                                    [ 18.357222, 99.572222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAMPANG 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.631389, 99.043611 ],
+                                    [ 18.631389, 99.043611 ],
+                                    [ 18.631389, 99.043611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAMPHUN 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.651389, 99.055833 ],
+                                    [ 18.651389, 99.055833 ],
+                                    [ 18.651389, 99.055833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAMPHUN 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.629444, 99.876667 ],
+                                    [ 16.629444, 99.876667 ],
+                                    [ 16.629444, 99.876667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAN KRABU'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.759722, 101.224444 ],
+                                    [ 16.759722, 101.224444 ],
+                                    [ 16.759722, 101.224444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LOM SAK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 19.182222, 97.9875 ],
+                                    [ 19.182222, 97.9875 ],
+                                    [ 19.182222, 97.9875 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAE HONG SON'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 18.315, 99.728056 ],
+                                    [ 18.315, 99.728056 ],
+                                    [ 18.315, 99.728056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAE MOH 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.298611, 99.752222 ],
+                                    [ 18.298611, 99.752222 ],
+                                    [ 18.298611, 99.752222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAE MOH 3'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.342778, 99.703333 ],
+                                    [ 18.342778, 99.703333 ],
+                                    [ 18.342778, 99.703333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAE MOH MINE'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 19.161389, 99.038611 ],
+                                    [ 19.161389, 99.038611 ],
+                                    [ 19.161389, 99.038611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAE NGAT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.717222, 98.601389 ],
+                                    [ 16.717222, 98.601389 ],
+                                    [ 16.717222, 98.601389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAE SOT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.298611, 100.108056 ],
+                                    [ 15.298611, 100.108056 ],
+                                    [ 15.298611, 100.108056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MANOROM'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 15.705, 100.105556 ],
+                                    [ 15.705, 100.105556 ],
+                                    [ 15.705, 100.105556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAKHON SAWAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.739444, 100.758611 ],
+                                    [ 18.739444, 100.758611 ],
+                                    [ 18.739444, 100.758611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 19.214167, 99.871944 ],
+                                    [ 19.214167, 99.871944 ],
+                                    [ 19.214167, 99.871944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHAYAO'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.835278, 100.241667 ],
+                                    [ 16.835278, 100.241667 ],
+                                    [ 16.835278, 100.241667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHITSANULOK 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.936389, 100.159722 ],
+                                    [ 16.936389, 100.159722 ],
+                                    [ 16.936389, 100.159722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHITSANULOK 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.116111, 100.143056 ],
+                                    [ 18.116111, 100.143056 ],
+                                    [ 18.116111, 100.143056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHRAE'
+                            }).addTo(map);
+                            
+                    var p = L.polyline(
+                            [ [ 15.980556, 99.7925 ],
+                                    [ 15.980556, 99.7925 ],
+                                    [ 15.980556, 99.7925 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SALOKBAT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.790833, 99.246944 ],
+                                    [ 18.790833, 99.246944 ],
+                                    [ 18.790833, 99.246944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAN KAMPHAENG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.338611, 99.898889 ],
+                                    [ 17.338611, 99.898889 ],
+                                    [ 17.338611, 99.898889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAWAN KHALOK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.759444, 100.5675 ],
+                                    [ 17.759444, 100.5675 ],
+                                    [ 17.759444, 100.5675 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SIRIKIT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.032778, 99.828333 ],
+                                    [ 17.032778, 99.828333 ],
+                                    [ 17.032778, 99.828333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SUKHOTHAI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.882778, 99.135 ],
+                                    [ 16.882778, 99.135 ],
+                                    [ 16.882778, 99.135 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  TAK 1'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 16.807778, 99.144444 ],
+                                    [ 16.807778, 99.144444 ],
+                                    [ 16.807778, 99.144444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  TAK 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.6025, 100.433889 ],
+                                    [ 15.6025, 100.433889 ],
+                                    [ 15.6025, 100.433889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THA TAKO'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.624167, 99.241389 ],
+                                    [ 17.624167, 99.241389 ],
+                                    [ 17.624167, 99.241389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THOEN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 19.735556, 100.231389 ],
+                                    [ 19.735556, 100.231389 ],
+                                    [ 19.735556, 100.231389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THOENG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.607222, 100.084722 ],
+                                    [ 17.607222, 100.084722 ],
+                                    [ 17.607222, 100.084722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  UTTARADIT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 9.086389, 99.343056 ],
+                                    [ 9.086389, 99.343056 ],
+                                    [ 9.086389, 99.343056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN DON'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 5.135278, 101.298333 ],
+                                    [ 5.135278, 101.298333 ],
+                                    [ 5.135278, 101.298333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN SANTI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 10.501667, 99.117778 ],
+                                    [ 10.501667, 99.117778 ],
+                                    [ 10.501667, 99.117778 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHUM PHON'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.995278, 100.433056 ],
+                                    [ 6.995278, 100.433056 ],
+                                    [ 6.995278, 100.433056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  HAT YAI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.966111, 100.491389 ],
+                                    [ 6.966111, 100.491389 ],
+                                    [ 6.966111, 100.491389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  HAT YAI 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 9.233611, 99.859444 ],
+                                    [ 9.233611, 99.859444 ],
+                                    [ 9.233611, 99.859444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHANOM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  Bangkok'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 6.714167, 100.4525 ],
+                                    [ 6.714167, 100.4525 ],
+                                    [ 6.714167, 100.4525 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHLONG NGAE'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 7.691944, 99.591111 ],
+                                    [ 7.691944, 99.591111 ],
+                                    [ 7.691944, 99.591111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LAMPOORA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 10.015556, 99.065 ],
+                                    [ 10.015556, 99.065 ],
+                                    [ 10.015556, 99.065 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  LANG SUAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 8.399167, 99.966111 ],
+                                    [ 8.399167, 99.966111 ],
+                                    [ 8.399167, 99.966111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAKHON SI THAMMARAT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  Bangkok'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.42, 101.79 ],
+                                    [ 6.42, 101.79 ],
+                                    [ 6.42, 101.79 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NARATHIWAT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.844167, 101.266111 ],
+                                    [ 6.844167, 101.266111 ],
+                                    [ 6.844167, 101.266111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PATTANI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 8.516944, 98.515556 ],
+                                    [ 8.516944, 98.515556 ],
+                                    [ 8.516944, 98.515556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHANGNGA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 7.598333, 100.028056 ],
+                                    [ 7.598333, 100.028056 ],
+                                    [ 7.598333, 100.028056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHATTHALUNG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 7.916944, 98.392778 ],
+                                    [ 7.916944, 98.392778 ],
+                                    [ 7.916944, 98.392778 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHUKET 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 7.859722, 98.3425 ],
+                                    [ 7.859722, 98.3425 ],
+                                    [ 7.859722, 98.3425 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHUKET 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 9.085, 99.258333 ],
+                                    [ 9.085, 99.258333 ],
+                                    [ 9.085, 99.258333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHUNPHIN'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 8.968611, 98.807222 ],
+                                    [ 8.968611, 98.807222 ],
+                                    [ 8.968611, 98.807222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RAJJAPRABHA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 9.742222, 98.594444 ],
+                                    [ 9.742222, 98.594444 ],
+                                    [ 9.742222, 98.594444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RANONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 7.815278, 100.356667 ],
+                                    [ 7.815278, 100.356667 ],
+                                    [ 7.815278, 100.356667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  RANOT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.685, 100.071111 ],
+                                    [ 6.685, 100.071111 ],
+                                    [ 6.685, 100.071111 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SATUN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  Bangkok'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 7.116111, 100.569167 ],
+                                    [ 7.116111, 100.569167 ],
+                                    [ 7.116111, 100.569167 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SONG KHLA'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ],
+                                    [ 13.746000, 100.500000 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  Bangkok'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.023056, 101.915833 ],
+                                    [ 6.023056, 101.915833 ],
+                                    [ 6.023056, 101.915833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SUNGAI KOLOK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 9.0725, 99.223889 ],
+                                    [ 9.0725, 99.223889 ],
+                                    [ 9.0725, 99.223889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SURAT THANI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 8.841667, 98.358056 ],
+                                    [ 8.841667, 98.358056 ],
+                                    [ 8.841667, 98.358056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  TAKUA PA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 8.13, 99.67 ],
+                                    [ 8.13, 99.67 ],
+                                    [ 8.13, 99.67 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THUNG SONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.498056, 101.263889 ],
+                                    [ 6.498056, 101.263889 ],
+                                    [ 6.498056, 101.263889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  YALA1'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 6.475, 101.268333 ],
+                                    [ 6.475, 101.268333 ],
+                                    [ 6.475, 101.268333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  YALA2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.935278, 99.353056 ],
+                                    [ 17.935278, 99.353056 ],
+                                    [ 17.935278, 99.353056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SOP PRAP'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.974444, 99.631389 ],
+                                    [ 13.974444, 99.631389 ],
+                                    [ 13.974444, 99.631389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THA MUANG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.784444, 101.2525 ],
+                                    [ 12.784444, 101.2525 ],
+                                    [ 12.784444, 101.2525 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BANKHAI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 20.197778, 99.921944 ],
+                                    [ 20.197778, 99.921944 ],
+                                    [ 20.197778, 99.921944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAE CHAN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.928889, 101.588333 ],
+                                    [ 13.928889, 101.588333 ],
+                                    [ 13.928889, 101.588333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SI MAHAPHOT'
+                            }).addTo(map);
+                            
+                    var p = L.polyline(
+                            [ [ 12.663889, 102.12 ],
+                                    [ 12.663889, 102.12 ],
+                                    [ 12.663889, 102.12 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHANTHABURI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.967222, 102.290833 ],
+                                    [ 13.967222, 102.290833 ],
+                                    [ 13.967222, 102.290833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHONG KLAM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.279444, 102.494444 ],
+                                    [ 12.279444, 102.494444 ],
+                                    [ 12.279444, 102.494444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  TRAT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 13.766667, 102.245278 ],
+                                    [ 13.766667, 102.245278 ],
+                                    [ 13.766667, 102.245278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  WATTHANA NAKHON'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.807222, 104.635278 ],
+                                    [ 15.807222, 104.635278 ],
+                                    [ 15.807222, 104.635278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  AMNAT CHAROEN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.078611, 102.728056 ],
+                                    [ 16.078611, 102.728056 ],
+                                    [ 16.078611, 102.728056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN PHAI'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 15.0225, 103.110556 ],
+                                    [ 15.0225, 103.110556 ],
+                                    [ 15.0225, 103.110556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BURI RAM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.826667, 102.092222 ],
+                                    [ 15.826667, 102.092222 ],
+                                    [ 15.826667, 102.092222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHAIYAPHUM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.559167, 102.0675 ],
+                                    [ 16.559167, 102.0675 ],
+                                    [ 16.559167, 102.0675 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  CHUM PHAE'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.378056, 103.5525 ],
+                                    [ 16.378056, 103.5525 ],
+                                    [ 16.378056, 103.5525 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KALASIN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.725556, 104.666667 ],
+                                    [ 14.725556, 104.666667 ],
+                                    [ 14.725556, 104.666667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KANTHARALAK'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.410556, 102.821389 ],
+                                    [ 16.410556, 102.821389 ],
+                                    [ 16.410556, 102.821389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHON KAEN 1'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 16.416111, 102.877222 ],
+                                    [ 16.416111, 102.877222 ],
+                                    [ 16.416111, 102.877222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHON KAEN 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.411944, 102.751389 ],
+                                    [ 16.411944, 102.751389 ],
+                                    [ 16.411944, 102.751389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHON KAEN 3'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.296667, 102.420833 ],
+                                    [ 15.296667, 102.420833 ],
+                                    [ 15.296667, 102.420833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.180556, 103.318333 ],
+                                    [ 16.180556, 103.318333 ],
+                                    [ 16.180556, 103.318333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MAHA SARAKHAM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.541389, 104.699722 ],
+                                    [ 16.541389, 104.699722 ],
+                                    [ 16.541389, 104.699722 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MUKDAHAN 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.608056, 104.707778 ],
+                                    [ 16.608056, 104.707778 ],
+                                    [ 16.608056, 104.707778 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  MUKDAHAN 2'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 17.382222, 104.761667 ],
+                                    [ 17.382222, 104.761667 ],
+                                    [ 17.382222, 104.761667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAKHON PRANOM'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.992778, 102.105556 ],
+                                    [ 14.992778, 102.105556 ],
+                                    [ 14.992778, 102.105556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAKHON RATCHASIMA 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.949167, 102.025278 ],
+                                    [ 14.949167, 102.025278 ],
+                                    [ 14.949167, 102.025278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAKHON RATCHASIMA 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.673056, 102.798056 ],
+                                    [ 16.673056, 102.798056 ],
+                                    [ 16.673056, 102.798056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAM PHONG 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.679167, 102.746667 ],
+                                    [ 16.679167, 102.746667 ],
+                                    [ 16.679167, 102.746667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAM PHONG 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.973056, 103.99 ],
+                                    [ 16.973056, 103.99 ],
+                                    [ 16.973056, 103.99 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NAM PUNG69'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.228611, 102.4075 ],
+                                    [ 17.228611, 102.4075 ],
+                                    [ 17.228611, 102.4075 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NONG BUA LAM PHU'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.358889, 103.209444 ],
+                                    [ 17.358889, 103.209444 ],
+                                    [ 17.358889, 103.209444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NONG HAN'
+                            }).addTo(map);  
+                            
+                    var p = L.polyline(
+                            [ [ 15.280556, 105.468611 ],
+                                    [ 15.280556, 105.468611 ],
+                                    [ 15.280556, 105.468611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PAK MUN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.367778, 103.715833 ],
+                                    [ 17.367778, 103.715833 ],
+                                    [ 17.367778, 103.715833 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHANG KHON'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.549722, 103.179444 ],
+                                    [ 15.549722, 103.179444 ],
+                                    [ 15.549722, 103.179444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHAYAKKHAPHUM PHISAI'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.806389, 102.581667 ],
+                                    [ 15.806389, 102.581667 ],
+                                    [ 15.806389, 102.581667 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHON'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.294722, 103.910556 ],
+                                    [ 16.294722, 103.910556 ],
+                                    [ 16.294722, 103.910556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHON THONG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.653611, 102.393056 ],
+                                    [ 14.653611, 102.393056 ],
+                                    [ 14.653611, 102.393056 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PRAKHON CHAI'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 16.075556, 103.651389 ],
+                                    [ 16.075556, 103.651389 ],
+                                    [ 16.075556, 103.651389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  ROIET1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.142778, 104.123611 ],
+                                    [ 17.142778, 104.123611 ],
+                                    [ 17.142778, 104.123611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SAKON NAKHON 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.071111, 104.349444 ],
+                                    [ 15.071111, 104.349444 ],
+                                    [ 15.071111, 104.349444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SI SA KET'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.672778, 103.735 ],
+                                    [ 16.672778, 103.735 ],
+                                    [ 16.672778, 103.735 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SOMDET'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.908611, 103.511944 ],
+                                    [ 14.908611, 103.511944 ],
+                                    [ 14.908611, 103.511944 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SURIN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.930833, 104.693611 ],
+                                    [ 16.930833, 104.693611 ],
+                                    [ 16.930833, 104.693611 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  THAT PHANOM'
+                            }).addTo(map);
+                            
+                    var p = L.polyline(
+                            [ [ 16.774444, 102.622222 ],
+                                    [ 16.774444, 102.622222 ],
+                                    [ 16.774444, 102.622222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  UBOLRATANA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.275833, 104.862222 ],
+                                    [ 15.275833, 104.862222 ],
+                                    [ 15.275833, 104.862222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  UBON RATCHATHANI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.150833, 104.894444 ],
+                                    [ 15.150833, 104.894444 ],
+                                    [ 15.150833, 104.894444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  UBON RATCHATHANI 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.448056, 102.793889 ],
+                                    [ 17.448056, 102.793889 ],
+                                    [ 17.448056, 102.793889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  UDON THANI 1'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.372222, 102.855278 ],
+                                    [ 17.372222, 102.855278 ],
+                                    [ 17.372222, 102.855278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  UDON THANI 2'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 15.796389, 104.195278 ],
+                                    [ 15.796389, 104.195278 ],
+                                    [ 15.796389, 104.195278 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  YASOTHON'
+                            }).addTo(map);    
+
+                    var p = L.polyline(
+                            [ [ 16.464167, 102.811389 ],
+                                    [ 16.464167, 102.811389 ],
+                                    [ 16.464167, 102.811389 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KHON KAEN UNIVERSITY'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.684722, 103.2025 ],
+                                    [ 17.684722, 103.2025 ],
+                                    [ 17.684722, 103.2025 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BAN DUNG'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 14.656389, 103.817222 ],
+                                    [ 14.656389, 103.817222 ],
+                                    [ 14.656389, 103.817222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SANG KA'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 12.753056, 102.310556 ],
+                                    [ 12.753056, 102.310556 ],
+                                    [ 12.753056, 102.310556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  KIRIDHARN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.460833, 100.388333 ],
+                                    [ 16.460833, 100.388333 ],
+                                    [ 16.460833, 100.388333 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHICHIT'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 16.335833, 101.088889 ],
+                                    [ 16.335833, 101.088889 ],
+                                    [ 16.335833, 101.088889 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  PHETCHABUN'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 17.241389, 98.977778 ],
+                                    [ 17.241389, 98.977778 ],
+                                    [ 17.241389, 98.977778 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BHUMIBOL'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 6.632222, 100.402222 ],
+                                    [ 6.632222, 100.402222 ],
+                                    [ 6.632222, 100.402222 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  SADAO'
+                            }).addTo(map);
+
+                    var p = L.polyline(
+                            [ [ 18.316667, 103.639444 ],
+                                    [ 18.316667, 103.639444 ],
+                                    [ 18.316667, 103.639444 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  BUNG KAN'
+                            }).addTo(map);
+
+                   var p = L.polyline(
+                            [ [ 17.820556, 102.760556 ],
+                                    [ 17.820556, 102.760556 ],
+                                    [ 17.820556, 102.760556 ] ], {
+                                weight : 1,
+                                color : '#fec355',
+                                text : '  NONG KHAI'
+                            }).addTo(map);
+                                    
+                    var layers = L.featureGroup().addTo(map);
+
+                    for ( var index in data) {
+                        var d = data[index];
+                        var latlng = L.latLng(d[0], d[1]);
+                        var c = L.circleMarker(latlng, {
+                            radius : 0,
+                            text : latlng.toString()
+                        });
+                        layers.addLayer(c);
+                        if (index == 3000) {
+                            break;
+                        }
+                    }
+
+                    function setCollisionDetection(flg) {
+                        labelTextCollision.options.collisionFlg = flg;
+                        map.fitBounds(map.getBounds());
+                     }
+
+                </script>
+
+   <script>
+
+        var layersArray = [];
+    createCanvasFlowmapLayer('https://gist.githubusercontent.com/Ittichaichaoman/00caa95c4449992b83a8d46e1480ea58/raw/b1d50fc736674d5c4dacceb4ff8bf535524fd67c/Full%2520Information%2520and%2520delete%2520return%2520information.csv', 0, true);
+
+    function createCanvasFlowmapLayer(csvFilePath, customLayerId, doOneTimeDemoSetup) {
+      Papa.parse(csvFilePath, {
+        download: true,
+        header: true,
+        dynamicTyping: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+
+                      var geoJsonFeatureCollection = {
+            type: 'FeatureCollection',
+            features: results.data.map(function(datum) {
+              return {
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: [datum.s_lon, datum.s_lat]
+                },
+                properties: datum
+              }
+            })
+          };
+
+                    var demoLayer = L.canvasFlowmapLayer(geoJsonFeatureCollection, {
+            originAndDestinationFieldIds: {
+              originUniqueIdField: 'S_Station_ID',
+              originGeometry: {
+                x: 'S_long',
+                y: 'S_lat'
+              },
+              destinationUniqueIdField: 'E_Station_ID',
+              destinationGeometry: {
+                x: 'E_long',
+                y: 'E_lat'
+              }
+            },
+pathProperties: {
+  type: 'classBreaks',
+  field: 'VOLTAGE_N',
+  defaultSymbol: {
+    strokeStyle: 'rgba(237, 248, 177, 1)',
+    lineWidth: 0.5,
+    lineCap: 'round'
+  },
+  classBreakInfos: [{
+    classMinValue: 20,
+    classMaxValue: 23,
+    symbol: {
+      strokeStyle: 'rgba(237, 248, 177, 1)',
+      lineWidth: 5000,
+      lineCap: 'round'
+    }
+  }, {
+    classMinValue: 114,
+    classMaxValue: 115,
+    symbol: {
+      strokeStyle: 'rgba(127, 205, 187, 1)',
+      lineWidth: 2,
+      lineCap: 'round'
+    }
+  }, {
+    classMinValue: 228,
+    classMaxValue: 231,
+    symbol: {
+      strokeStyle: 'rgba(44, 127, 184, 1)',
+      lineWidth: 100,
+      lineCap: 'round'
+    }
+  }, {
+    classMinValue: 499,
+    classMaxValue: 501,
+    symbol: {
+      strokeStyle: 'rgba(44, 127, 184, 1)',
+      lineWidth: 1000,
+      lineCap: 'round'
+    }
+  }]
+},
+            pathDisplayMode: 'selection',
+            animationStarted: true,
+            animationEasingFamily: 'Cubic',
+            animationEasingType: 'In',
+            animationDuration: 2000,
+            customLayerId: customLayerId
+          });
+          layersArray.push(demoLayer);
+
+          if (doOneTimeDemoSetup) {
+            demoLayer.addTo(map);
+
+            layerListenerChange({
+              target: userInteractionSelect
+            });
+
+            // immediately select an origin point for Bezier path display,
+            // instead of waiting for the first user click event to fire
+            
+
+            // populate animation easing options for select drop-down
+
+
+            Object.keys(tweenEasingFamilies).forEach(function(family) {
+              tweenEasingFamilies[family].types.forEach(function(type) {
+
+                if (
+                  family === demoLayer.options.animationEasingFamily &&
+                  type === demoLayer.options.animationEasingType
+                ) {
+                  option.selected = true;
+                }
+
+                pathAnimationStyleSelect.add(option);
+              });
+            });
+          }
+        }
+      });
+    }
+
+    // establish references to form elements in the control panel card
+    var oneToManyLayerButton = document.getElementById('oneToManyLayerButton');
+
+    // establish actions for form elements in the control panel card
+
+    function toggleActiveLayer(evt) {
+      oneToManyLayerButton.classList.remove('button-primary');
+
+      layersArray.forEach(function(layer) {
+        if (layer.options.customLayerId === Number(evt.target.value)) {
+          map.addLayer(layer);
+        } else {
+          map.removeLayer(layer);
+        }
+      });
+
+      evt.target.classList.add('button-primary');
+    }
+
+    pathAnimationStyleSelect.addEventListener('change', function(evt) {
+      var optionValueToArray = evt.target.value.split(',');
+      var easingFamily = optionValueToArray[0];
+      var easingType = optionValueToArray[1];
+
+      layersArray.forEach(function(layer) {
+        layer.setAnimationEasing(easingFamily, easingType);
+      });
+    });
+
+    pathAnimationButton.addEventListener('click', function(evt) {
+      if (evt.target.innerHTML === 'Pause') {
+        evt.target.classList.add('button-primary');
+        evt.target.innerHTML = 'Play';
+      } 
+
+      layersArray.forEach(function(layer) {
+        if (layer.options.animationStarted) {
+          layer.stopAnimation();
+        }
+      });
+    });
+
+    pathAnimationDurationInput.addEventListener('input', function(evt) {
+      layersArray.forEach(function(layer) {
+        layer.setAnimationDuration(evt.target.value);
+      });
+    });
+
+    // toggle click or mouseover listeners
+
+
+    function layerListenerChange(e) {
+      if (e.target.value === 'click') {
+        layersArray.forEach(function(layer) {
+          layer.on('click', handleLayerInteraction);
+        });
+      } else {
+        layersArray.forEach(function(layer) {
+          layer.off('click', handleLayerInteraction);
+        });
+      }
+    }
+
+    function handleLayerInteraction(e) {
+      if (e.sharedOriginFeatures.length) {
+        e.target.selectFeaturesForPathDisplay(e.sharedOriginFeatures, pathSelectionTypeSelect.value);
+      }
+      if (e.sharedDestinationFeatures.length) {
+        e.target.selectFeaturesForPathDisplay(e.sharedDestinationFeatures, pathSelectionTypeSelect.value);
+      }
+    }
+
+   </script>
+
+    
+
+</body>
+
+</html>
